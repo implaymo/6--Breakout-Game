@@ -23,6 +23,10 @@ while running:
     
     player_pos_tuple = (int(player_pos.x), int(player_pos.y))
     pygame.draw.rect(screen, "black", pygame.Rect(player_pos_tuple[0], player_pos_tuple[1], 200, 10))
+    for i in range(22):
+        rect_x = i * 60
+        rect_y = 100  
+        pygame.draw.rect(screen, (0, 255, 0), pygame.Rect(rect_x, rect_y, 50, 30))
 
     keys = pygame.key.get_pressed()
     if keys[pygame.K_a]:
