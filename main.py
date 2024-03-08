@@ -8,7 +8,8 @@ clock = pygame.time.Clock()
 running = True
 dt = 0
 
-player_pos = pygame.Vector2(screen.get_width() / 2, screen.get_height() / 2)
+player_pos = pygame.Vector2(100,700)
+
 
 while running:
     # poll for events
@@ -21,13 +22,9 @@ while running:
     screen.fill("purple")
     
     player_pos_tuple = (int(player_pos.x), int(player_pos.y))
-    pygame.draw.rect(screen, "red", pygame.Rect(player_pos_tuple[0], player_pos_tuple[1], 200, 10))
+    pygame.draw.rect(screen, "black", pygame.Rect(player_pos_tuple[0], player_pos_tuple[1], 200, 10))
 
     keys = pygame.key.get_pressed()
-    if keys[pygame.K_w]:
-        player_pos.y -= 1000 * dt
-    if keys[pygame.K_s]:
-        player_pos.y += 1000 * dt
     if keys[pygame.K_a]:
         player_pos.x -= 1000 * dt
     if keys[pygame.K_d]:
