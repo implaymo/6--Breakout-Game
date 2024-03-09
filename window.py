@@ -18,7 +18,7 @@ class Screen():
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.running = False
-            self.screen.fill("purple")
+            self.screen.fill("black")
             
             self.paddle.draw(self.screen)
             self.block.draw_multiple_blocks(self.screen)
