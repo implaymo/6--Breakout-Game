@@ -26,7 +26,10 @@ class Screen:
             self.block.draw_multiple_blocks(self.screen)
             self.game_ball.draw_ball(self.screen)
             self.game_ball.move_ball()
+            self.game_ball.check_if_ball_hit_paddle(self.paddle)  
+            self.game_ball.check_if_ball_hit_top_bottom_edges()   
             self.paddle.move_player(self.dt)
+
             
             pygame.display.flip()
             self.dt = self.clock.tick(60) / 1000
