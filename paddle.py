@@ -1,6 +1,6 @@
 import pygame
 
-class PaddleRect():
+class PaddleRect:
     def __init__(self) -> None:   
         self.paddle_width = 200
         self.paddle_height = 10

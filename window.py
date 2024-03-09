@@ -3,7 +3,7 @@ from paddle import PaddleRect
 from blocks import Block
 from ball import GameBall
 
-class Screen():
+class Screen:
     def __init__(self) -> None:
         self.screen = pygame.display.set_mode((1280, 720))
         self.clock = pygame.time.Clock()
@@ -25,6 +25,7 @@ class Screen():
             self.paddle.draw(self.screen)
             self.block.draw_multiple_blocks(self.screen)
             self.game_ball.draw_ball(self.screen)
+            self.game_ball.move_ball()
             self.paddle.move_player(self.dt)
             
             pygame.display.flip()
