@@ -17,7 +17,7 @@ class PaddleRect():
                 self.player_pos.x = 0
         if keys[pygame.K_d]:
             self.player_pos.x += self.speed * dt
-            if self.player_pos.x > 1280 - self.paddle_width: 
+            if self.player_pos.x > 1280 - self.paddle_width:  
                 self.player_pos.x = 1280 - self.paddle_width
             
     def draw(self, screen):
