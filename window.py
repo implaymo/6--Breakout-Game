@@ -1,6 +1,7 @@
 import pygame
 from paddle import PaddleRect
 from blocks import Block
+from ball import GameBall
 
 class Screen():
     def __init__(self) -> None:
@@ -10,6 +11,7 @@ class Screen():
         self.dt = 0
         self.paddle = PaddleRect()
         self.block = Block()
+        self.game_ball = GameBall()
         
         
     def run_game(self): 
@@ -22,6 +24,7 @@ class Screen():
             
             self.paddle.draw(self.screen)
             self.block.draw_multiple_blocks(self.screen)
+            self.game_ball.draw_ball(self.screen)
             self.paddle.move_player(self.dt)
             
             pygame.display.flip()
