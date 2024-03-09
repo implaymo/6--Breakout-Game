@@ -31,6 +31,5 @@ class GameBall:
         if self.ball_pos.y < 0:
             self.ball_speed *= -1
         elif self.ball_pos.y > 720:
-            self.ball_speed *= -1
             print("Game Over")
             self.ball_pos.y = 600
