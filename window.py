@@ -31,7 +31,7 @@ class Screen:
             self.game_ball.move_ball()
             self.game_ball.check_if_ball_hit_paddle(self.paddle)  
             self.game_ball.check_if_ball_hit_top_bottom_edges() 
-            self.game_ball.check_if_ball_hit_sides_edges()  
+            self.game_ball.check_if_ball_hit_side_edges()  
             
             self.paddle.move_player(self.dt)
 
