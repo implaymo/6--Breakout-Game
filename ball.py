@@ -15,7 +15,7 @@ class GameBall:
 
     def ball_hit_left_side_paddle(self, paddle: PaddleRect):
         """Checks if ball hits the left side of the paddle and if it is between boundaries"""
-        y_tolerance = 5
+        y_tolerance = 7
         mid_paddle_pos = paddle.paddle_pos.x + (paddle.paddle_width / 2)
         if (paddle.paddle_pos.x <= self.ball_pos.x <= mid_paddle_pos and paddle.paddle_pos.y - y_tolerance <= self.ball_pos.y <= paddle.paddle_pos.y + y_tolerance):
             
@@ -23,7 +23,7 @@ class GameBall:
 
     def ball_hit_right_side_paddle(self, paddle: PaddleRect):
         """Checks if ball hits the right side of the paddle and if it is between boundaries"""
-        y_tolerance = 5
+        y_tolerance = 7
         mid_paddle_pos = paddle.paddle_pos.x + (paddle.paddle_width / 2)
         right_edge_paddle = paddle.paddle_pos.x + paddle.paddle_width
         if (mid_paddle_pos <= self.ball_pos.x <= right_edge_paddle and paddle.paddle_pos.y - y_tolerance <= self.ball_pos.y <= paddle.paddle_pos.y + y_tolerance):
@@ -61,7 +61,7 @@ class GameBall:
 
     def move_ball_diagonal_right_up(self):
         self.ball_speed[1] *= -1
-        self.ball_speed[0] *= -1
+        self.ball_speed[0] *= 1
 
 
   
