@@ -6,6 +6,9 @@ class GameBall:
         self.ball_pos = pygame.Vector2(640, 660)
         self.ball_color = "white"
         self.ball_speed = [3, 3]
+        self.last_hit_right_wall = False
+        self.last_hit_left_wall = False
+        
         
     def draw_ball(self,screen):
         pygame.draw.circle(screen, self.ball_color, self.ball_pos, 10)
@@ -50,19 +53,31 @@ class GameBall:
         left_wall = 0
         right_wall = 1280
         if self.ball_pos.x < left_wall:
+            self.last_hit_left_wall = True
+            self.last_hit_right_wall = False
             self.ball_speed[0] *= -1
         elif self.ball_pos.x > right_wall:
+            self.last_hit_left_wall = False
+            self.last_hit_right_wall = True
             self.ball_speed[0] *= -1
             
 
     def move_ball_diagonal_left_up(self):
-        self.ball_speed[1] *= -1
-        self.ball_speed[0] *= 1
-
+        if self.last_hit_left_wall is True:
+            self.ball_speed[1] *= -1
+            self.ball_speed[0] *= -1
+        else:
+            self.ball_speed[1] *= -1
+            self.ball_speed[0] *= 1
+            
+            
     def move_ball_diagonal_right_up(self):
-        self.ball_speed[1] *= -1
-        self.ball_speed[0] *= 1
-
+        if self.last_hit_right_wall is True:
+            self.ball_speed[1] *= -1
+            self.ball_speed[0] *= -1
+        else: 
+            self.ball_speed[1] *= -1
+            self.ball_speed[0] *= 1
 
   
             

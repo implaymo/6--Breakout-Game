@@ -9,6 +9,7 @@ class PaddleRect:
         self.paddle_pos = pygame.Vector2(self.paddle_pos_x, self.paddle_pos_y)
         self.keys = pygame.key.get_pressed()
         self.speed = 1000
+        
 
     
     def move_player(self, dt):
