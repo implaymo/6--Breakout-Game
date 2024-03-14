@@ -5,12 +5,12 @@ import random
 class GameBall:
     def __init__(self, paddle: PaddleRect) -> None:
         self.random_direction(paddle)
-        self.ball_pos = pygame.Vector2(self.ball_random_start_pos, 660)
+        self.ball_pos = pygame.Vector2(self.ball_random_start_pos, 690)
         self.ball_color = "white"
         self.ball_speed = [5, 5]
         self.last_hit_right_wall = False
         self.last_hit_left_wall = False
-        
+        self.ball_random_start_direction = random.randint(1,2)
         
         
     def draw_ball(self,screen):
@@ -22,7 +22,10 @@ class GameBall:
         self.ball_random_start_pos = random.randint(int(left_edge_paddle), int(right_edge_paddle))
         
     def move_ball(self):
-        self.ball_pos -= self.ball_speed
+        if self.ball_random_start_direction == 1:
+            self.ball_pos += self.ball_speed
+        else:
+            self.ball_pos -= self.ball_speed
             
     def ball_hit_left_side_paddle(self, paddle: PaddleRect):
         """Checks if ball hits the left side of the paddle and if it is between boundaries"""
