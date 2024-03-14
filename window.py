@@ -11,13 +11,13 @@ class Screen:
         self.dt = 0
         self.paddle = PaddleRect()
         self.block = Block()
-        self.game_ball = GameBall()
+        self.game_ball = GameBall(self.paddle)
 
-        
         
     def run_game(self): 
         pygame.init()
-
+        
+        
         while self.running:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -27,6 +27,8 @@ class Screen:
             self.paddle.draw(self.screen)
             self.block.draw_multiple_blocks(self.screen)
             self.game_ball.draw_ball(self.screen)
+            
+            self.game_ball.random_direction(self.paddle)
 
             self.game_ball.move_ball()
             self.game_ball.check_if_ball_hit_paddle(self.paddle) 
