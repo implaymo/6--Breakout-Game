@@ -7,15 +7,22 @@ class GameBall:
         self.random_direction(paddle)
         self.ball_pos = pygame.Vector2(self.ball_random_start_pos, 690)
         self.ball_color = "white"
+        self.ball_radius = 5
         self.ball_speed = [5, 5]
         self.last_hit_right_wall = False
         self.last_hit_left_wall = False
         self.ball_random_start_direction = random.randint(1,2)
+        self.ball_rect = None
         
         
     def draw_ball(self,screen):
-        pygame.draw.circle(screen, self.ball_color, self.ball_pos, 10)
+        pygame.draw.circle(screen, self.ball_color, self.ball_pos, self.ball_radius*2)
         
+    def create_ball_rect(self):
+        self.ball_rect = pygame.Rect(self.ball_pos.x - self.ball_radius, self.ball_pos.y - self.ball_radius, self.ball_radius * 2, self.ball_radius * 2)
+        return self.ball_rect
+        
+    
     def random_direction(self, paddle: PaddleRect):
         left_edge_paddle = paddle.paddle_pos.x
         right_edge_paddle = paddle.paddle_pos.x + paddle.paddle_width
@@ -90,5 +97,7 @@ class GameBall:
             self.ball_speed[1] *= -1
             self.ball_speed[0] *= 1
 
-  
+    
+    def reset_ball_position(self):
+        pass
             

@@ -9,17 +9,27 @@ class Block():
         self.rows = 4
         self.columns = 15
         self.get_random_color()
-
+        self.all_blocks = []
+        
         
     def draw_multiple_blocks(self,screen):
-        self.all_blocks = []
         for row in range(self.rows):
             for column in range(self.columns):
-                player_pos_x = 0 + column * (self.block_width + 5)
-                player_pos_y = 100 + row * (self.block_height + 5)
-                new_block = pygame.draw.rect(screen, self.color, pygame.Rect(player_pos_x, player_pos_y, self.block_width, self.block_height))
-                self.all_blocks.append(new_block) 
+                block_pos_x = 0 + column * (self.block_width + 5)
+                block_pos_y = 100 + row * (self.block_height + 5)
+                self.block_rect = pygame.Rect(block_pos_x, block_pos_y, self.block_width, self.block_height)
+                pygame.draw.rect(screen, self.color, self.block_rect)
+                self.all_blocks.append(self.block_rect)
         return self.all_blocks
+    
+    def check_collision_with_ball(self, ball: GameBall):
+        for block in self.all_blocks:
+            if block.colliderect(ball.ball_rect):
+                self.all_blocks.remove(block)
+                    
+            
+            
+
     
     def get_random_color(self):
         red = random.randint(0, 255)
@@ -33,9 +43,7 @@ class Block():
         else:
             self.color = (red, green, blue)
             
-    def delete_block(self, ball: GameBall):
-        for i in self.all_blocks:
-            block = self.all_blocks[i]
-            if block == ball.ball_pos:
-                self.all_blocks.pop(block)
+
+
         
+    
