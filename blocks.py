@@ -12,18 +12,21 @@ class Block():
         self.all_blocks = []
         
         
-    def draw_multiple_blocks(self,screen):
+    def create_all_block_rects(self):
         for row in range(self.rows):
             for column in range(self.columns):
                 block_pos_x = 0 + column * (self.block_width + 5)
                 block_pos_y = 100 + row * (self.block_height + 5)
                 self.block_rect = pygame.Rect(block_pos_x, block_pos_y, self.block_width, self.block_height)
-                pygame.draw.rect(screen, self.color, self.block_rect)
                 self.all_blocks.append(self.block_rect)
-        return self.all_blocks
+        
+        
+    def draw_multiple_blocks(self, screen):
+        for block_rect in self.all_blocks:
+            pygame.draw.rect(screen, self.color, block_rect)
     
     def check_collision_with_ball(self, ball: GameBall):
-        for block in self.all_blocks:
+        for block in self.all_blocks[:]: 
             if block.colliderect(ball.ball_rect):
                 self.all_blocks.remove(block)
                     

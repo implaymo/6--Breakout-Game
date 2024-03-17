@@ -20,7 +20,7 @@ class Screen:
         pygame.init()
         pygame.display.set_caption("My Breakout Game")
             
-        
+        self.block.create_all_block_rects()
                     
         while self.running:
             for event in pygame.event.get():
@@ -34,7 +34,6 @@ class Screen:
             self.paddle.draw_paddle(self.screen)
             self.game_ball.draw_ball(self.screen)
             self.game_ball.create_ball_rect()
-            
             self.game_ball.random_direction(self.paddle)
 
             
