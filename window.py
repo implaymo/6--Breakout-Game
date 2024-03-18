@@ -42,8 +42,8 @@ class Screen:
             # Check collisions
             self.block.check_collision_with_ball(self.game_ball)
             self.game_ball.check_if_ball_hit_paddle(self.paddle) 
-            self.game_ball.check_if_ball_hit_top_bottom_edges() 
-            self.game_ball.check_if_ball_hit_side_edges()  
+            self.game_ball.check_if_ball_hit_top_bottom_walls() 
+            self.game_ball.check_if_ball_hit_side_walls()  
             
             self.paddle.move_player(self.dt)
 

@@ -8,18 +8,22 @@ class GameBall:
         self.ball_pos = pygame.Vector2(self.ball_random_start_pos, 690)
         self.ball_color = "white"
         self.ball_radius = 5
-        self.ball_speed = [5, 5]
+        self.ball_speed = [3, 3]
         self.last_hit_right_wall = False
         self.last_hit_left_wall = False
+        self.last_hit_top = False
         self.ball_random_start_direction = random.randint(1,2)
         self.ball_rect = None
+
+
         
         
     def draw_ball(self,screen):
-        pygame.draw.circle(screen, self.ball_color, self.ball_pos, self.ball_radius*2)
+        pygame.draw.circle(screen, self.ball_color, self.ball_pos, self.ball_radius * 2)
         
     def create_ball_rect(self):
-        self.ball_rect = pygame.Rect(self.ball_pos.x - self.ball_radius, self.ball_pos.y - self.ball_radius, self.ball_radius * 2, self.ball_radius * 2)
+        enlarged_radius = self.ball_radius + 10  # Increase the radius by 10
+        self.ball_rect = pygame.Rect(self.ball_pos.x - enlarged_radius, self.ball_pos.y - enlarged_radius, enlarged_radius * 2, enlarged_radius * 2)
         return self.ball_rect
         
     
@@ -57,17 +61,18 @@ class GameBall:
         self.ball_hit_right_side_paddle(paddle)
             
     
-    def check_if_ball_hit_top_bottom_edges(self):
+    def check_if_ball_hit_top_bottom_walls(self):
         top = 0
         bottom = 720
         if self.ball_pos.y < top:
+            self.last_hit_top = True
             self.ball_speed[1] *= -1
             self.ball_speed[0] *= 1
         elif self.ball_pos.y > bottom:
             print("Game Over")
             self.ball_pos.y = 600
             
-    def check_if_ball_hit_side_edges(self):
+    def check_if_ball_hit_side_walls(self):
         left_wall = 0
         right_wall = 1280
         if self.ball_pos.x < left_wall:

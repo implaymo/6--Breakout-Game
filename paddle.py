@@ -2,8 +2,8 @@ import pygame
 
 class PaddleRect:
     def __init__(self) -> None:   
-        self.paddle_width = 100
-        self.paddle_height = 10
+        self.paddle_width = 300
+        self.paddle_height = 5
         self.paddle_pos_x = 640 - (self.paddle_width / 2)
         self.paddle_pos_y = 700
         self.paddle_pos = pygame.Vector2(self.paddle_pos_x, self.paddle_pos_y)
