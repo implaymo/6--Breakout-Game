@@ -13,8 +13,6 @@ class Screen:
         self.block = Block()
         self.game_ball = GameBall(self.paddle)
 
-
-
     def run_game(self): 
         
         pygame.init()
@@ -28,7 +26,6 @@ class Screen:
                     self.running = False
             self.screen.fill("black")
             
-            
             # Create objects
             self.block.draw_multiple_blocks(self.screen)
             self.paddle.draw_paddle(self.screen)
@@ -36,7 +33,6 @@ class Screen:
             self.game_ball.create_ball_rect()
             self.game_ball.ball_start_random_direction(self.paddle)
 
-            
             self.game_ball.move_ball()
             
             # Check collisions
@@ -46,13 +42,10 @@ class Screen:
             self.game_ball.check_if_ball_hit_side_walls()  
             
             self.paddle.move_player(self.dt)
-
-            
+ 
             pygame.display.flip()
             self.dt = self.clock.tick(60) / 1000
             
-    
-        
     def end_game(self):
         pygame.quit()
         

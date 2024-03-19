@@ -8,15 +8,12 @@ class GameBall:
         self.ball_pos = pygame.Vector2(self.ball_random_start_pos, 690)
         self.ball_color = "white"
         self.ball_radius = 5
-        self.ball_speed = [5,5]
+        self.ball_speed = [5, 5]
         self.last_hit_right_wall = False
         self.last_hit_left_wall = False
         self.ball_random_start_direction = random.randint(1,2)
         self.ball_rect = None
 
-
-        
-        
     def draw_ball(self,screen):
         pygame.draw.circle(screen, self.ball_color, self.ball_pos, self.ball_radius * 2)
         
@@ -25,7 +22,6 @@ class GameBall:
         self.ball_rect = pygame.Rect(self.ball_pos.x - enlarged_radius, self.ball_pos.y - enlarged_radius, enlarged_radius * 2, enlarged_radius * 2)
         return self.ball_rect
         
-    
     def ball_start_random_direction(self, paddle: PaddleRect):
         left_edge_paddle = paddle.paddle_pos.x
         right_edge_paddle = paddle.paddle_pos.x + paddle.paddle_width
@@ -39,16 +35,31 @@ class GameBall:
         """Checks if ball hits the left side of the paddle and if it is between boundaries"""
         y_tolerance = 7
         mid_paddle_pos = paddle.paddle_pos.x + (paddle.paddle_width / 2)
+        middle_of_left_edge_paddle = (paddle.paddle_pos.x + mid_paddle_pos) / 2
+        # Checks if ball is within the limits of left side of the paddle
         if (paddle.paddle_pos.x <= self.ball_pos.x <= mid_paddle_pos and paddle.paddle_pos.y - y_tolerance <= self.ball_pos.y <= paddle.paddle_pos.y + y_tolerance):
-            self.move_ball_diagonal_left_up()
+            print(mid_paddle_pos)
+            print(middle_of_left_edge_paddle)
+            # NEED TO CHANGE DIRECTION WHEN BALL HITS DIFFERENT SIDE OF THE PADDLE
+            if self.ball_pos.x > middle_of_left_edge_paddle:
+                self.move_ball_diagonal_left_up()
+            else:
+                self.move_ball_diagonal_left_up()
+
 
     def ball_hit_right_side_paddle(self, paddle: PaddleRect):
         """Checks if ball hits the right side of the paddle and if it is between boundaries"""
         y_tolerance = 7
         mid_paddle_pos = paddle.paddle_pos.x + (paddle.paddle_width / 2)
-        right_edge_paddle = paddle.paddle_pos.x + paddle.paddle_width
+        right_edge_paddle = mid_paddle_pos + (paddle.paddle_width / 2)
+        middle_of_right_edge_paddle = (mid_paddle_pos + right_edge_paddle) / 2
+        # Checks if ball is within the limits of right side of the paddle
         if (mid_paddle_pos <= self.ball_pos.x <= right_edge_paddle and paddle.paddle_pos.y - y_tolerance <= self.ball_pos.y <= paddle.paddle_pos.y + y_tolerance):
-            self.move_ball_diagonal_right_up()
+            # NEED TO CHANGE DIRECTION WHEN BALL HITS DIFFERENT SIDE OF THE PADDLE
+            if self.ball_pos.x < middle_of_right_edge_paddle:
+                self.move_ball_diagonal_right_up()
+            else:
+                self.move_ball_diagonal_right_up()
 
 
     def check_if_ball_hit_paddle(self, paddle: PaddleRect):
@@ -74,8 +85,6 @@ class GameBall:
             self.ball_speed[0] *= -1
             
 
-            
-
     def move_ball_diagonal_left_up(self):
         if self.ball_speed[0] < 0: 
             self.ball_speed[1] *= -1
@@ -92,8 +101,6 @@ class GameBall:
             self.ball_speed[1] *= -1
             self.ball_speed[0] *= -1
 
-
-    
     def reset_ball_position(self):
         pass
             

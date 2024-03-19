@@ -14,7 +14,6 @@ class Block():
         self.hit_left_block = False
         self.hit_right_block = False
         
-        
     def create_all_block_rects(self):
         for row in range(self.rows):
             for column in range(self.columns):
@@ -23,8 +22,6 @@ class Block():
                 block_rect = pygame.Rect(block_pos_x, block_pos_y, self.block_width, self.block_height)
                 self.all_blocks.append(block_rect)
 
-        
-        
     def draw_multiple_blocks(self, screen):
         for block_rect in self.all_blocks:
             pygame.draw.rect(screen, self.color, block_rect)
