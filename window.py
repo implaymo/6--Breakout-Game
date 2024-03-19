@@ -38,15 +38,18 @@ class Screen:
             self.game_ball.ball_start_position(self.paddle)
 
             if self.game_started:
-                self.game_ball.move_ball()
-            
-                # Check collisions
-                self.block.check_collision_with_ball(self.game_ball)
-                self.game_ball.check_if_ball_hit_paddle(self.paddle) 
-                self.game_ball.check_if_ball_hit_top_bottom_walls() 
-                self.game_ball.check_if_ball_hit_side_walls()  
+                if self.game_ball.game_over is True:
+                    pygame.quit()
+                else:
+                    self.game_ball.move_ball()
                 
-                self.paddle.move_player(self.dt)
+                    # Check collisions
+                    self.block.check_collision_with_ball(self.game_ball)
+                    self.game_ball.check_if_ball_hit_paddle(self.paddle) 
+                    self.game_ball.check_if_ball_hit_top_bottom_walls() 
+                    self.game_ball.check_if_ball_hit_side_walls()  
+                    
+                    self.paddle.move_player(self.dt)
     
             pygame.display.flip()
             self.dt = self.clock.tick(60) / 1000
@@ -56,4 +59,5 @@ class Screen:
         
         
 
-        
+    def restart_game(self):
+        pass

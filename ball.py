@@ -2,6 +2,7 @@ import pygame
 from paddle import PaddleRect
 import random
 
+
 class GameBall:
     def __init__(self, paddle: PaddleRect) -> None:
         self.ball_start_position(paddle)
@@ -13,6 +14,7 @@ class GameBall:
         self.last_hit_left_wall = False
         self.ball_rect = None
         self.random_number_for_random_direction = random.randint(1,2)
+        self.game_over = False
 
     def draw_ball(self,screen):
         pygame.draw.circle(screen, self.ball_color, self.ball_pos, self.ball_radius * 2)
@@ -74,8 +76,9 @@ class GameBall:
         if self.ball_pos.y < top:
             self.ball_speed[1] *= -1
         elif self.ball_pos.y > bottom:
-            print("Game Over")
-            self.ball_pos.y = 600
+            self.game_over = True
+  
+
             
     def check_if_ball_hit_side_walls(self):
         left_wall = 0
@@ -117,7 +120,3 @@ class GameBall:
         else:
             self.ball_speed[1] *= -1
             self.ball_speed[0] = -random.randint(2, 7)
-
-    def reset_ball_position(self):
-        pass
-            
