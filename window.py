@@ -12,6 +12,7 @@ class Screen:
         self.paddle = PaddleRect()
         self.block = Block()
         self.game_ball = GameBall(self.paddle)
+        self.game_started = False
 
     def run_game(self): 
         
@@ -24,6 +25,9 @@ class Screen:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.running = False
+                elif event.type == pygame.MOUSEBUTTONDOWN:
+                    if event.button == 1:  
+                        self.game_started = True
             self.screen.fill("black")
             
             # Create objects
@@ -31,21 +35,22 @@ class Screen:
             self.paddle.draw_paddle(self.screen)
             self.game_ball.draw_ball(self.screen)
             self.game_ball.create_ball_rect()
-            self.game_ball.ball_start_random_direction(self.paddle)
+            self.game_ball.ball_start_position(self.paddle)
 
-            self.game_ball.move_ball()
+            if self.game_started:
+                self.game_ball.move_ball()
             
-            # Check collisions
-            self.block.check_collision_with_ball(self.game_ball)
-            self.game_ball.check_if_ball_hit_paddle(self.paddle) 
-            self.game_ball.check_if_ball_hit_top_bottom_walls() 
-            self.game_ball.check_if_ball_hit_side_walls()  
-            
-            self.paddle.move_player(self.dt)
- 
+                # Check collisions
+                self.block.check_collision_with_ball(self.game_ball)
+                self.game_ball.check_if_ball_hit_paddle(self.paddle) 
+                self.game_ball.check_if_ball_hit_top_bottom_walls() 
+                self.game_ball.check_if_ball_hit_side_walls()  
+                
+                self.paddle.move_player(self.dt)
+    
             pygame.display.flip()
             self.dt = self.clock.tick(60) / 1000
-            
+        
     def end_game(self):
         pygame.quit()
         

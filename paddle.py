@@ -8,7 +8,8 @@ class PaddleRect:
         self.paddle_pos_y = 700
         self.paddle_pos = pygame.Vector2(self.paddle_pos_x, self.paddle_pos_y)
         self.keys = pygame.key.get_pressed()
-        self.speed = 1000
+        self.speed = 2000
+        self.middle_of_paddle = self.paddle_pos.x + (self.paddle_width / 2)
         
 
     

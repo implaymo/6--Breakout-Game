@@ -4,15 +4,15 @@ import random
 
 class GameBall:
     def __init__(self, paddle: PaddleRect) -> None:
-        self.ball_start_random_direction(paddle)
-        self.ball_pos = pygame.Vector2(self.ball_random_start_pos, 670)
+        self.ball_start_position(paddle)
+        self.ball_pos = pygame.Vector2(self.ball_start_pos, 690)
         self.ball_color = "white"
         self.ball_radius = 5
         self.ball_speed = [5, 5]
         self.last_hit_right_wall = False
         self.last_hit_left_wall = False
-        self.ball_random_start_direction = random.randint(1,2)
         self.ball_rect = None
+        self.random_number_for_random_direction = random.randint(1,2)
 
     def draw_ball(self,screen):
         pygame.draw.circle(screen, self.ball_color, self.ball_pos, self.ball_radius * 2)
@@ -22,14 +22,17 @@ class GameBall:
         self.ball_rect = pygame.Rect(self.ball_pos.x - enlarged_radius, self.ball_pos.y - enlarged_radius, enlarged_radius * 2, enlarged_radius * 2)
         return self.ball_rect
         
-    def ball_start_random_direction(self, paddle: PaddleRect):
-        left_edge_paddle = paddle.paddle_pos.x
-        right_edge_paddle = paddle.paddle_pos.x + paddle.paddle_width
-        self.ball_random_start_pos = random.randint(int(left_edge_paddle), int(right_edge_paddle))
+    def ball_start_position(self, paddle: PaddleRect):
+        self.ball_start_pos = paddle.middle_of_paddle
+        return self.ball_start_pos
         
     def move_ball(self):
-        self.ball_pos[0] += self.ball_speed[0] 
-        self.ball_pos[1] += self.ball_speed[1]
+        if self.random_number_for_random_direction == 1:
+            self.ball_pos[0] -= self.ball_speed[0]
+            self.ball_pos[1] -= self.ball_speed[1]
+        else:
+            self.ball_pos[0] += self.ball_speed[0]
+            self.ball_pos[1] -= self.ball_speed[1]
     
     def ball_hit_left_side_paddle(self, paddle: PaddleRect):
         """Checks if ball hits the left side of the paddle and if it is between boundaries"""
@@ -103,11 +106,9 @@ class GameBall:
         if self.ball_speed[0] > 0: 
             self.ball_speed[1] *= -1
             self.ball_speed[0] = random.randint(2, 7)
-            print(self.ball_speed[0])
         else:
             self.ball_speed[1] *= -1
             self.ball_speed[0] = abs(random.randint(2, 7)) * 1
-            print(self.ball_speed[0])
             
     def change_speed_ball_left(self):
         if self.ball_speed[0] < 0: 
