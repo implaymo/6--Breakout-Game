@@ -34,7 +34,7 @@ class Screen:
             self.paddle.draw_paddle(self.screen)
             self.game_ball.draw_ball(self.screen)
             self.game_ball.create_ball_rect()
-            self.game_ball.random_direction(self.paddle)
+            self.game_ball.ball_start_random_direction(self.paddle)
 
             
             self.game_ball.move_ball()
