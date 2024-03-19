@@ -5,7 +5,7 @@ import random
 class GameBall:
     def __init__(self, paddle: PaddleRect) -> None:
         self.ball_start_random_direction(paddle)
-        self.ball_pos = pygame.Vector2(self.ball_random_start_pos, 690)
+        self.ball_pos = pygame.Vector2(self.ball_random_start_pos, 670)
         self.ball_color = "white"
         self.ball_radius = 5
         self.ball_speed = [5, 5]
@@ -42,7 +42,7 @@ class GameBall:
             if self.ball_pos.x > middle_of_left_edge_paddle:
                 self.move_ball_diagonal_left_up()
             else:
-                self.move_ball_diagonal_left_up()
+                self.change_speed_ball_left()
 
 
     def ball_hit_right_side_paddle(self, paddle: PaddleRect):
@@ -57,7 +57,7 @@ class GameBall:
             if self.ball_pos.x < middle_of_right_edge_paddle:
                 self.move_ball_diagonal_right_up()
             else:
-                self.move_ball_diagonal_right_up()
+                self.change_speed_ball_right()
 
 
     def check_if_ball_hit_paddle(self, paddle: PaddleRect):
@@ -82,7 +82,7 @@ class GameBall:
         elif self.ball_pos.x > right_wall:
             self.ball_speed[0] *= -1
             
-
+    
     def move_ball_diagonal_left_up(self):
         if self.ball_speed[0] < 0: 
             self.ball_speed[1] *= -1
@@ -98,6 +98,24 @@ class GameBall:
         else:
             self.ball_speed[1] *= -1
             self.ball_speed[0] *= -1
+    
+    def change_speed_ball_right(self):
+        if self.ball_speed[0] > 0: 
+            self.ball_speed[1] *= -1
+            self.ball_speed[0] = random.randint(2, 7)
+            print(self.ball_speed[0])
+        else:
+            self.ball_speed[1] *= -1
+            self.ball_speed[0] = abs(random.randint(2, 7)) * 1
+            print(self.ball_speed[0])
+            
+    def change_speed_ball_left(self):
+        if self.ball_speed[0] < 0: 
+            self.ball_speed[1] *= -1
+            self.ball_speed[0] = -random.randint(2, 7)       
+        else:
+            self.ball_speed[1] *= -1
+            self.ball_speed[0] = -random.randint(2, 7)
 
     def reset_ball_position(self):
         pass

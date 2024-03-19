@@ -6,7 +6,7 @@ class Block():
     def __init__(self) -> None:
         self.block_height = 50
         self.block_width = 81
-        self.rows = 2
+        self.rows = 3
         self.columns = 15
         self.get_random_color()
         self.all_blocks = []
