@@ -38,8 +38,6 @@ class GameBall:
         middle_of_left_edge_paddle = (paddle.paddle_pos.x + mid_paddle_pos) / 2
         # Checks if ball is within the limits of left side of the paddle
         if (paddle.paddle_pos.x <= self.ball_pos.x <= mid_paddle_pos and paddle.paddle_pos.y - y_tolerance <= self.ball_pos.y <= paddle.paddle_pos.y + y_tolerance):
-            print(mid_paddle_pos)
-            print(middle_of_left_edge_paddle)
             # NEED TO CHANGE DIRECTION WHEN BALL HITS DIFFERENT SIDE OF THE PADDLE
             if self.ball_pos.x > middle_of_left_edge_paddle:
                 self.move_ball_diagonal_left_up()
