@@ -13,6 +13,8 @@ class Block():
         self.hit_bottom = False
         self.hit_left_block = False
         self.hit_right_block = False
+        self.hit_any_block = False
+        self.block_hit_count = 0
         
     def create_all_block_rects(self):
         for row in range(self.rows):
@@ -29,11 +31,13 @@ class Block():
     def check_collision_with_ball(self, ball: GameBall):
         for block in self.all_blocks[:]:
             if block.colliderect(ball.ball_rect):
+                self.block_hit_count += 1
                 if ball.ball_rect.centerx < block.left or ball.ball_rect.centerx > block.right:
                     ball.ball_speed[0] *= -1
                 else:
                     ball.ball_speed[1] *= -1
                 self.all_blocks.remove(block)
+   
 
     def get_random_color(self):
         red = random.randint(0, 255)
@@ -47,6 +51,8 @@ class Block():
         else:
             self.color = (red, green, blue)
             
+    def reset_block_counting(self):
+        self.block_hit_count = 0
 
 
         

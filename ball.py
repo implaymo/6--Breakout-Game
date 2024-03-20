@@ -16,8 +16,6 @@ class GameBall:
         self.random_number_for_random_direction = random.randint(1,2)
         self.game_over = False
         
-
-
     def draw_ball(self,screen):
         pygame.draw.circle(screen, self.ball_color, self.ball_pos, self.ball_radius * 2)
         
@@ -33,9 +31,7 @@ class GameBall:
     def move_ball(self):
         self.ball_pos[0] += self.ball_speed[0]
         self.ball_pos[1] -= self.ball_speed[1]
-
-
-            
+     
     def ball_hit_left_side_paddle(self, paddle: PaddleRect):
         """Checks if ball hits the left side of the paddle and if it is between boundaries"""
         y_tolerance = 7
@@ -47,7 +43,6 @@ class GameBall:
                 self.move_ball_left()
             else:
                 self.change_speed_ball_left()
-
 
     def ball_hit_right_side_paddle(self, paddle: PaddleRect):
         """Checks if ball hits the right side of the paddle and if it is between boundaries"""
@@ -62,12 +57,10 @@ class GameBall:
             else:
                 self.change_speed_ball_right()
 
-
     def check_if_ball_hit_paddle(self, paddle: PaddleRect):
         self.ball_hit_left_side_paddle(paddle)
         self.ball_hit_right_side_paddle(paddle)
             
-    
     def check_if_ball_hit_top_bottom_walls(self):
         top = 0
         bottom = 720
@@ -76,8 +69,6 @@ class GameBall:
         elif self.ball_pos.y > bottom:
             self.game_over = True
   
-
-            
     def check_if_ball_hit_side_walls(self):
         left_wall = 0
         right_wall = 1280
@@ -119,4 +110,3 @@ class GameBall:
         else:
             self.ball_speed[1] *= -1
             self.ball_speed[0] = -abs(random.randint(2, 7)) * 1
-            

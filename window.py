@@ -2,6 +2,7 @@ import pygame
 from paddle import PaddleRect
 from blocks import Block
 from ball import GameBall
+from score import NewScore
 
 class Screen:
     def __init__(self) -> None:
@@ -12,14 +13,17 @@ class Screen:
         self.paddle = PaddleRect()
         self.block = Block()
         self.game_ball = GameBall(self.paddle)
+        self.new_score = NewScore()
         self.game_started = False
+    
 
     def run_game(self): 
         
         pygame.init()
         pygame.display.set_caption("My Breakout Game")
-            
+  
         self.block.create_all_block_rects()
+        
                     
         while self.running:
             for event in pygame.event.get():
@@ -29,6 +33,9 @@ class Screen:
                     if event.button == 1:  
                         self.game_started = True
             self.screen.fill("black")
+            score_text = self.new_score.render_score(self.block) 
+            self.screen.blit(score_text, (10, 10)) 
+
             
             # Create objects
             self.block.draw_multiple_blocks(self.screen)
@@ -63,5 +70,7 @@ class Screen:
         self.paddle = PaddleRect()
         self.game_ball = GameBall(self.paddle)
         self.block.create_all_block_rects()
+        self.block.reset_block_counting()
         self.game_started = False
+
             
