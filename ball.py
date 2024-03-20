@@ -15,6 +15,8 @@ class GameBall:
         self.ball_rect = None
         self.random_number_for_random_direction = random.randint(1,2)
         self.game_over = False
+        
+
 
     def draw_ball(self,screen):
         pygame.draw.circle(screen, self.ball_color, self.ball_pos, self.ball_radius * 2)
@@ -27,25 +29,22 @@ class GameBall:
     def ball_start_position(self, paddle: PaddleRect):
         self.ball_start_pos = paddle.middle_of_paddle
         return self.ball_start_pos
-        
-    def move_ball(self):
-        if self.random_number_for_random_direction == 1:
-            self.ball_pos[0] -= self.ball_speed[0]
-            self.ball_pos[1] -= self.ball_speed[1]
-        else:
-            self.ball_pos[0] += self.ball_speed[0]
-            self.ball_pos[1] -= self.ball_speed[1]
     
+    def move_ball(self):
+        self.ball_pos[0] += self.ball_speed[0]
+        self.ball_pos[1] -= self.ball_speed[1]
+
+
+            
     def ball_hit_left_side_paddle(self, paddle: PaddleRect):
         """Checks if ball hits the left side of the paddle and if it is between boundaries"""
         y_tolerance = 7
         mid_paddle_pos = paddle.paddle_pos.x + (paddle.paddle_width / 2)
         middle_of_left_edge_paddle = (paddle.paddle_pos.x + mid_paddle_pos) / 2
-        # Checks if ball is within the limits of left side of the paddle
+        # Checks if ball is within the limits of left side of the paddle and changes speed if hit outside or inside of the left side of the paddle.
         if (paddle.paddle_pos.x <= self.ball_pos.x <= mid_paddle_pos and paddle.paddle_pos.y - y_tolerance <= self.ball_pos.y <= paddle.paddle_pos.y + y_tolerance):
-            # NEED TO CHANGE DIRECTION WHEN BALL HITS DIFFERENT SIDE OF THE PADDLE
             if self.ball_pos.x > middle_of_left_edge_paddle:
-                self.move_ball_diagonal_left_up()
+                self.move_ball_left()
             else:
                 self.change_speed_ball_left()
 
@@ -56,11 +55,10 @@ class GameBall:
         mid_paddle_pos = paddle.paddle_pos.x + (paddle.paddle_width / 2)
         right_edge_paddle = mid_paddle_pos + (paddle.paddle_width / 2)
         middle_of_right_edge_paddle = (mid_paddle_pos + right_edge_paddle) / 2
-        # Checks if ball is within the limits of right side of the paddle
+        # Checks if ball is within the limits of right side of the paddle and changes speed if hit outside or inside of the right side of the paddle.
         if (mid_paddle_pos <= self.ball_pos.x <= right_edge_paddle and paddle.paddle_pos.y - y_tolerance <= self.ball_pos.y <= paddle.paddle_pos.y + y_tolerance):
-            # NEED TO CHANGE DIRECTION WHEN BALL HITS DIFFERENT SIDE OF THE PADDLE
             if self.ball_pos.x < middle_of_right_edge_paddle:
-                self.move_ball_diagonal_right_up()
+                self.move_ball_right()
             else:
                 self.change_speed_ball_right()
 
@@ -89,29 +87,22 @@ class GameBall:
             self.ball_speed[0] *= -1
             
     
-    def move_ball_diagonal_left_up(self):
+    def move_ball_left(self):
         if self.ball_speed[0] < 0: 
             self.ball_speed[1] *= -1
             self.ball_speed[0] *= 1       
         else:
             self.ball_speed[1] *= -1
             self.ball_speed[0] *= -1
+            
 
-    def move_ball_diagonal_right_up(self):
+    def move_ball_right(self):
         if self.ball_speed[0] > 0: 
             self.ball_speed[1] *= -1
             self.ball_speed[0] *= 1
         else:
             self.ball_speed[1] *= -1
             self.ball_speed[0] *= -1
-    
-    def change_speed_ball_right(self):
-        if self.ball_speed[0] > 0: 
-            self.ball_speed[1] *= -1
-            self.ball_speed[0] = random.randint(2, 7)
-        else:
-            self.ball_speed[1] *= -1
-            self.ball_speed[0] = abs(random.randint(2, 7)) * 1
             
     def change_speed_ball_left(self):
         if self.ball_speed[0] < 0: 
@@ -120,3 +111,12 @@ class GameBall:
         else:
             self.ball_speed[1] *= -1
             self.ball_speed[0] = -random.randint(2, 7)
+    
+    def change_speed_ball_right(self):
+        if self.ball_speed[0] > 0: 
+            self.ball_speed[1] *= -1
+            self.ball_speed[0] = random.randint(2, 7)
+        else:
+            self.ball_speed[1] *= -1
+            self.ball_speed[0] = -abs(random.randint(2, 7)) * 1
+            
