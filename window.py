@@ -45,10 +45,10 @@ class Screen:
             self.game_ball.ball_start_position(self.paddle)
 
             if self.game_started:
-                    self.start_game()
+                self.start_game()
             if self.game_ball.game_over is True:
                     self.restart_game()
-                    
+                
             pygame.display.flip()
             self.dt = self.clock.tick(60) / 1000
         
@@ -57,7 +57,6 @@ class Screen:
         
     def start_game(self):
         self.game_ball.move_ball()
-                
         # Check collisions
         self.block.check_collision_with_ball(self.game_ball)
         self.game_ball.check_if_ball_hit_paddle(self.paddle) 
@@ -69,6 +68,7 @@ class Screen:
     def restart_game(self):
         self.paddle = PaddleRect()
         self.game_ball = GameBall(self.paddle)
+        self.block = Block()
         self.block.create_all_block_rects()
         self.block.reset_block_counting()
         self.game_started = False
