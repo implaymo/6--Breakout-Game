@@ -33,8 +33,11 @@ class Screen:
                     if event.button == 1:  
                         self.game_started = True
             self.screen.fill("black")
-            score_text = self.new_score.render_score(self.block) 
+            score_text = self.new_score.render_score(self.block)
+            highscore_text = self.new_score.render_highscore() 
             self.screen.blit(score_text, (10, 10)) 
+            self.screen.blit(highscore_text, (10, 35)) 
+            
 
             
             # Create objects
