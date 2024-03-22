@@ -15,6 +15,7 @@ class Screen:
         self.game_ball = GameBall(self.paddle)
         self.new_score = NewScore()
         self.game_started = False
+        self.player_won = False
     
 
     def run_game(self): 
@@ -33,13 +34,13 @@ class Screen:
                     if event.button == 1:  
                         self.game_started = True
             self.screen.fill("black")
+            
+            # Score and Highscore text
             score_text = self.new_score.render_score(self.block)
             highscore_text = self.new_score.render_highscore() 
             self.screen.blit(score_text, (10, 10)) 
-            self.screen.blit(highscore_text, (10, 35)) 
-            
+            self.screen.blit(highscore_text, (10, 40)) 
 
-            
             # Create objects
             self.block.draw_multiple_blocks(self.screen)
             self.paddle.draw_paddle(self.screen)
@@ -49,10 +50,13 @@ class Screen:
 
             if self.game_started:
                 self.start_game()
+                
             if self.game_ball.game_over is True:
                 self.new_score.high_score(self.block)
                 self.restart_game()
-                
+            else:
+                self.restart_game_if_user_wins()
+                self.new_score.high_score(self.block)
             pygame.display.flip()
             self.dt = self.clock.tick(60) / 1000
         
@@ -70,11 +74,26 @@ class Screen:
         self.paddle.move_player(self.dt)
     
     def restart_game(self):
-        self.paddle = PaddleRect()
-        self.game_ball = GameBall(self.paddle)
-        self.block = Block()
-        self.block.create_all_block_rects()
-        self.block.reset_block_counting()
-        self.game_started = False
-
+        bottom = 720
+        if self.game_ball.ball_pos.y > bottom:
+            self.paddle = PaddleRect()
+            self.game_ball = GameBall(self.paddle)
+            self.block = Block()
+            self.block.create_all_block_rects()
+            self.block.reset_block_counting()
+            self.game_started = False
+    
+    def restart_game_if_user_wins(self):
+        bottom = 720
+        if not self.block.all_blocks:
+            self.player_won = True
+            
+        if self.game_ball.ball_pos.y < bottom and self.player_won is True:
+            self.paddle = PaddleRect()
+            self.game_ball = GameBall(self.paddle)
+            self.block.create_all_block_rects()
+            self.game_started = False
+            self.player_won = False
+            
+            
             

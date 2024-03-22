@@ -12,8 +12,6 @@ class NewScore:
         return score_text
     
     def render_highscore(self):
-        with open("highscore_storage.txt", "r") as file:
-                self.current_highscore = file.read()
         highscore_text = self.font.render(f"Highscore: {self.current_highscore}", True, (255, 255, 255))  # Render score text
         return highscore_text
         

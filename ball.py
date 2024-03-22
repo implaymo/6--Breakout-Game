@@ -109,4 +109,4 @@ class GameBall:
             self.ball_speed[0] = random.randint(2, 7)
         else:
             self.ball_speed[1] *= -1
-            self.ball_speed[0] = -abs(random.randint(2, 7)) * 1
+            self.ball_speed[0] = random.randint(2, 7) * 1
