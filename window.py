@@ -35,7 +35,6 @@ class Screen:
             self.screen.fill("black")
             score_text = self.new_score.render_score(self.block) 
             self.screen.blit(score_text, (10, 10)) 
-            self.new_score.high_score(self.block)
 
             
             # Create objects
@@ -48,6 +47,7 @@ class Screen:
             if self.game_started:
                 self.start_game()
             if self.game_ball.game_over is True:
+                self.new_score.high_score(self.block)
                 self.restart_game()
                 
             pygame.display.flip()
