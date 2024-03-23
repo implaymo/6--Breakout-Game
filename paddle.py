@@ -4,7 +4,7 @@ import pygame
 class PaddleRect:
     def __init__(self) -> None:   
         self.paddle_width = 300
-        self.paddle_height = 5
+        self.paddle_height = 10
         self.paddle_pos_x = 640 - (self.paddle_width / 2)
         self.paddle_pos_y = 700
         self.paddle_pos = pygame.Vector2(self.paddle_pos_x, self.paddle_pos_y)
@@ -28,6 +28,13 @@ class PaddleRect:
     def draw_paddle(self, screen):
         pygame.draw.rect(screen, (255, 0, 0), pygame.Rect(self.paddle_pos.x, self.paddle_pos.y, self.paddle_width, self.paddle_height))
     
-    
+    def reset_paddle_pos(self):
+        self.paddle_pos_x = 640 - (self.paddle_width / 2)
+        self.paddle_pos_y = 700
+        self.paddle_pos = pygame.Vector2(self.paddle_pos_x, self.paddle_pos_y)
+
+
     def change_paddle_size(self):
         self.paddle_width -= 50
+        self.reset_paddle_pos()
+

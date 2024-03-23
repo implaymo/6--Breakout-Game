@@ -7,9 +7,11 @@ class NewLevel:
         self.font_initialization = pygame.font.init()
         self.font = pygame.font.Font(None, 36)
 
-    def change_level(self, paddle: PaddleRect):
+    def change_level(self):
         self.level += 1
-        paddle.change_paddle_size()
+
+    def reset_level(self):
+        self.level = 1
         
     def render_level(self):
         level_text = self.font.render(f"Level: {self.level}", True, (255, 255, 255))  # Render level text

@@ -90,6 +90,7 @@ class Screen:
     def restart_game(self):
         bottom = 720
         if self.game_ball.ball_pos.y > bottom:
+            self.new_level.reset_level()
             self.paddle = PaddleRect()
             self.game_ball = GameBall(self.paddle)
             self.block = Block()
@@ -103,8 +104,8 @@ class Screen:
             self.player_won = True
             
         if self.game_ball.ball_pos.y < bottom and self.player_won is True:
-            self.paddle = PaddleRect()
-            self.new_level.change_level(self.paddle)
+            self.new_level.change_level()
+            self.paddle.change_paddle_size()
             self.game_ball = GameBall(self.paddle)
             self.block.create_all_block_rects()
             self.game_started = False
