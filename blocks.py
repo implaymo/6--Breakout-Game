@@ -21,7 +21,7 @@ class Block():
             for column in range(self.columns):
                 block_pos_x = 0 + column * (self.block_width + 5)
                 block_pos_y = 300 + row * (self.block_height + 5)
-                block_rect = pygame.Rect(block_pos_x + 5, block_pos_y + 5, self.block_width, self.block_height)
+                block_rect = pygame.Rect(block_pos_x, block_pos_y, self.block_width, self.block_height)
                 self.all_blocks.append(block_rect)
 
     def draw_multiple_blocks(self, screen):

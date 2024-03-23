@@ -20,8 +20,8 @@ class GameBall:
         pygame.draw.circle(screen, self.ball_color, self.ball_pos, self.ball_radius * 2)
         
     def create_ball_rect(self):
-        enlarged_radius = self.ball_radius + 5
-        self.ball_rect = pygame.Rect(self.ball_pos.x - enlarged_radius, self.ball_pos.y - enlarged_radius, enlarged_radius * 2, enlarged_radius * 2)
+        enlarged_radius =  self.ball_radius + 5
+        self.ball_rect = pygame.Rect(self.ball_pos.x - enlarged_radius, self.ball_pos.y - enlarged_radius, self.ball_radius * 2, enlarged_radius * 2)
         return self.ball_rect
         
     def ball_start_position(self, paddle: PaddleRect):
