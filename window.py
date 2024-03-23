@@ -35,11 +35,15 @@ class Screen:
                         self.game_started = True
             self.screen.fill("black")
             
+        
+            
             # Score and Highscore text
             score_text = self.new_score.render_score(self.block)
+            self.screen.blit(score_text, (10, 10))
+
             highscore_text = self.new_score.render_highscore() 
-            self.screen.blit(score_text, (10, 10)) 
-            self.screen.blit(highscore_text, (10, 40)) 
+            self.screen.blit(highscore_text, (10, 40))  
+            self.new_score.high_score(self.block, self.game_ball)
 
             # Create objects
             self.block.draw_multiple_blocks(self.screen)
@@ -48,15 +52,18 @@ class Screen:
             self.game_ball.create_ball_rect()
             self.game_ball.ball_start_position(self.paddle)
 
+            
+
             if self.game_started:
                 self.start_game()
                 
-            if self.game_ball.game_over is True:
-                self.new_score.high_score(self.block)
+                
+            if self.game_ball.game_over is True:   
+                self.new_score.high_score(self.block, self.game_ball) 
                 self.restart_game()
             else:
                 self.restart_game_if_user_wins()
-                self.new_score.high_score(self.block)
+
             pygame.display.flip()
             self.dt = self.clock.tick(60) / 1000
         

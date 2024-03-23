@@ -1,4 +1,5 @@
 from blocks import Block
+from ball import GameBall
 import pygame
 
 class NewScore:
@@ -12,21 +13,21 @@ class NewScore:
         return score_text
     
     def render_highscore(self):
-        highscore_text = self.font.render(f"Highscore: {self.current_highscore}", True, (255, 255, 255))  # Render score text
+        highscore_text = self.font.render(f"Highscore: {self.current_highscore}", True, (255, 255, 255))  # Render highscore text
         return highscore_text
         
     
-    def high_score(self, block: Block):
+    def high_score(self, block: Block, ball: GameBall):
         try:
             with open("highscore_storage.txt", "r") as file:
                 self.current_highscore = file.read()
-                if int(self.current_highscore) < block.block_hit_count:
+                if int(self.current_highscore) < block.block_hit_count and ball.game_over is True:
                     with open("highscore_storage.txt", "w") as file:
                         file.write(str(block.block_hit_count))       
         except FileNotFoundError:
             with open("highscore_storage.txt", "w") as file:
                 file.write(str(block.block_hit_count))
-
+        
                 
 
     
