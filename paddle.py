@@ -1,4 +1,5 @@
 import pygame
+from blocks import Block
 
 class PaddleRect:
     def __init__(self) -> None:   
@@ -27,4 +28,7 @@ class PaddleRect:
     def draw_paddle(self, screen):
         pygame.draw.rect(screen, (255, 0, 0), pygame.Rect(self.paddle_pos.x, self.paddle_pos.y, self.paddle_width, self.paddle_height))
     
-    
+    def change_size_of_paddle(self, block: Block):
+        if not block.all_blocks:
+            self.paddle_width -= 30
+             
