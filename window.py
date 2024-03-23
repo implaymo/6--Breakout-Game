@@ -68,7 +68,7 @@ class Screen:
                 self.restart_game()
             else:
                 self.restart_game_if_user_wins()
-                self.new_level.change_level()
+                
 
 
             pygame.display.flip()
@@ -104,6 +104,7 @@ class Screen:
             
         if self.game_ball.ball_pos.y < bottom and self.player_won is True:
             self.paddle = PaddleRect()
+            self.new_level.change_level(self.paddle)
             self.game_ball = GameBall(self.paddle)
             self.block.create_all_block_rects()
             self.game_started = False

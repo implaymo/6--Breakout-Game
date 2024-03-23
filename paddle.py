@@ -29,4 +29,5 @@ class PaddleRect:
         pygame.draw.rect(screen, (255, 0, 0), pygame.Rect(self.paddle_pos.x, self.paddle_pos.y, self.paddle_width, self.paddle_height))
     
     
-             
+    def change_paddle_size(self):
+        self.paddle_width -= 50
