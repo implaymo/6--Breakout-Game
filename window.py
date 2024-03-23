@@ -3,6 +3,7 @@ from paddle import PaddleRect
 from blocks import Block
 from ball import GameBall
 from score import NewScore
+from level import NewLevel
 
 class Screen:
     def __init__(self) -> None:
@@ -14,6 +15,7 @@ class Screen:
         self.block = Block()
         self.game_ball = GameBall(self.paddle)
         self.new_score = NewScore()
+        self.new_level = NewLevel()
         self.game_started = False
         self.player_won = False
     
@@ -45,6 +47,9 @@ class Screen:
             self.screen.blit(highscore_text, (10, 40))  
             self.new_score.high_score(self.block, self.game_ball)
 
+            level_text = self.new_level.render_level()
+            self.screen.blit(level_text, (640, 10))
+
             # Create objects
             self.block.draw_multiple_blocks(self.screen)
             self.paddle.draw_paddle(self.screen)
@@ -63,6 +68,8 @@ class Screen:
                 self.restart_game()
             else:
                 self.restart_game_if_user_wins()
+                self.new_level.change_level()
+
 
             pygame.display.flip()
             self.dt = self.clock.tick(60) / 1000
