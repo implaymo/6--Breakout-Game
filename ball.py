@@ -100,15 +100,15 @@ class GameBall:
     def change_speed_ball_left(self):
         if self.ball_speed[0] < 0: 
             self.ball_speed[1] *= -1
-            self.ball_speed[0] = -random.randint(4, 8)  
+            self.ball_speed[0] = -random.randint(3, 5)  
         else:
             self.ball_speed[1] *= -1
-            self.ball_speed[0] = -random.randint(4, 8)
+            self.ball_speed[0] = -random.randint(3, 5)
     
     def change_speed_ball_right(self):
         if self.ball_speed[0] > 0: 
             self.ball_speed[1] *= -1
-            self.ball_speed[0] = random.randint(4, 8)
+            self.ball_speed[0] = random.randint(3, 5)
         else:
             self.ball_speed[1] *= -1
-            self.ball_speed[0] = random.randint(4, 8) * 1
+            self.ball_speed[0] = random.randint(3, 5) * 1
