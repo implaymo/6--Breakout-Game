@@ -35,6 +35,7 @@ class PaddleRect:
 
 
     def change_paddle_size(self):
-        self.paddle_width -= 50
+        if self.paddle_width >= 50:
+            self.paddle_width -= 50
         self.reset_paddle_pos()
 
