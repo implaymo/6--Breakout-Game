@@ -40,7 +40,7 @@ class GameBall:
         middle_of_left_edge_paddle = (paddle.paddle_pos.x + mid_paddle_pos) / 2
         # Checks if ball is within the limits of left side of the paddle and changes speed if hit outside or inside of the left side of the paddle.
         if (paddle.paddle_pos.x <= self.ball_pos.x <= mid_paddle_pos and paddle.paddle_pos.y - y_tolerance <= self.ball_pos.y <= paddle.paddle_pos.y + y_tolerance):
-            if self.ball_pos.x > middle_of_left_edge_paddle:
+            if self.ball_rect.centerx > middle_of_left_edge_paddle:
                 self.move_ball_left()
             else:
                 self.change_speed_ball_left()
@@ -54,7 +54,7 @@ class GameBall:
         middle_of_right_edge_paddle = (mid_paddle_pos + right_edge_paddle) / 2
         # Checks if ball is within the limits of right side of the paddle and changes speed if hit outside or inside of the right side of the paddle.
         if (mid_paddle_pos <= self.ball_pos.x <= right_edge_paddle and paddle.paddle_pos.y - y_tolerance <= self.ball_pos.y <= paddle.paddle_pos.y + y_tolerance):
-            if self.ball_pos.x < middle_of_right_edge_paddle:
+            if self.ball_rect.centerx < middle_of_right_edge_paddle:
                 self.move_ball_right()
             else:
                 self.change_speed_ball_right()
