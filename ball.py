@@ -6,7 +6,7 @@ import random
 class GameBall:
     def __init__(self, paddle: PaddleRect) -> None:
         self.ball_start_position(paddle)
-        self.ball_pos = pygame.Vector2(self.ball_start_pos, 690)
+        self.ball_pos = pygame.Vector2(self.ball_start_pos, 680)
         self.ball_color = "white"
         self.ball_radius = 5
         self.ball_speed = [5, 5]
@@ -15,13 +15,12 @@ class GameBall:
         self.ball_rect = None
         self.random_number_for_random_direction = random.randint(1,2)
         self.game_over = False
-        self.random_speed = random.randint(6, 7)
         
     def draw_ball(self,screen):
         pygame.draw.circle(screen, self.ball_color, self.ball_pos, self.ball_radius * 2)
         
     def create_ball_rect(self):
-        enlarged_radius = self.ball_radius + 5
+        enlarged_radius = self.ball_radius + 10
         self.ball_rect = pygame.Rect(self.ball_pos.x - enlarged_radius, self.ball_pos.y - enlarged_radius, enlarged_radius * 2, enlarged_radius * 2)
         return self.ball_rect
         
@@ -45,6 +44,7 @@ class GameBall:
                 self.move_ball_left()
             else:
                 self.change_speed_ball_left()
+
 
     def ball_hit_right_side_paddle(self, paddle: PaddleRect):
         """Checks if ball hits the right side of the paddle and if it is between boundaries"""
@@ -100,15 +100,15 @@ class GameBall:
     def change_speed_ball_left(self):
         if self.ball_speed[0] < 0: 
             self.ball_speed[1] *= -1
-            self.ball_speed[0] = -self.random_speed  
+            self.ball_speed[0] = -random.randint(4, 8)  
         else:
             self.ball_speed[1] *= -1
-            self.ball_speed[0] = -self.random_speed
+            self.ball_speed[0] = -random.randint(4, 8)
     
     def change_speed_ball_right(self):
         if self.ball_speed[0] > 0: 
             self.ball_speed[1] *= -1
-            self.ball_speed[0] = self.random_speed
+            self.ball_speed[0] = random.randint(4, 8)
         else:
             self.ball_speed[1] *= -1
-            self.ball_speed[0] = self.random_speed * 1
+            self.ball_speed[0] = random.randint(4, 8) * 1
